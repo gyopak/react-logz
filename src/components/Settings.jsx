@@ -13,7 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  setDarkMode, setInfosVisibility, setWarningsVisibility, setErrorsVisibility,
+  setDarkMode, setSeverityVisible,
 } from '../features/settingsSlice';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,12 +34,14 @@ export default function Settings() {
   const [open, setOpen] = useState(false);
   const {
     isDarkMode,
-    infosVisible,
-    warningsVisible,
-    errorsVisible,
+    visibleSeverities,
   } = useSelector((state) => state.settings);
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  const isInfosVisible = visibleSeverities.includes('INFO');
+  const isWarningsVisible = visibleSeverities.includes('WARNING');
+  const isErrorsVisible = visibleSeverities.includes('ERROR');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -53,15 +55,24 @@ export default function Settings() {
   };
 
   const toggleInfosVisibility = () => {
-    dispatch(setInfosVisibility(!infosVisible));
+    dispatch(setSeverityVisible({
+      severity: 'INFO',
+      shouldShow: !isInfosVisible,
+    }));
   };
 
   const toggleWarningsVisibility = () => {
-    dispatch(setWarningsVisibility(!warningsVisible));
+    dispatch(setSeverityVisible({
+      severity: 'WARNING',
+      shouldShow: !isWarningsVisible,
+    }));
   };
 
   const toggleErrorsVisibility = () => {
-    dispatch(setErrorsVisibility(!errorsVisible));
+    dispatch(setSeverityVisible({
+      severity: 'ERROR',
+      shouldShow: !isErrorsVisible,
+    }));
   };
 
   return (
@@ -94,21 +105,21 @@ export default function Settings() {
             <FormControlLabel
               value="start"
               className={classes.formRow}
-              control={<Switch checked={infosVisible} onChange={toggleInfosVisibility} color="primary" />}
+              control={<Switch checked={isInfosVisible} onChange={toggleInfosVisibility} color="primary" />}
               label="Show infos"
               labelPlacement="start"
             />
             <FormControlLabel
               value="start"
               className={classes.formRow}
-              control={<Switch checked={errorsVisible} onChange={toggleErrorsVisibility} color="primary" />}
+              control={<Switch checked={isErrorsVisible} onChange={toggleErrorsVisibility} color="primary" />}
               label="Show errors"
               labelPlacement="start"
             />
             <FormControlLabel
               value="start"
               className={classes.formRow}
-              control={<Switch checked={warningsVisible} onChange={toggleWarningsVisibility} color="primary" />}
+              control={<Switch checked={isWarningsVisible} onChange={toggleWarningsVisibility} color="primary" />}
               label="Show warnings"
               labelPlacement="start"
             />

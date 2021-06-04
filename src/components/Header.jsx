@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Settings from './Settings';
+import Statistics from './Statistics';
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -15,11 +16,12 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
           logz
         </Typography>
+        <Statistics />
         <Settings />
       </Toolbar>
     </AppBar>

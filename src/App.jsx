@@ -4,6 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from './components/Header';
+import LogViewer from './components/LogViewer';
 import { setDarkMode } from './features/settingsSlice';
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header />
+      <LogViewer />
     </ThemeProvider>
   );
 };

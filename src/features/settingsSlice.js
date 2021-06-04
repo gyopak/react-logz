@@ -5,9 +5,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isDarkMode: null,
-  infosVisible: true,
-  warningsVisible: true,
-  errorsVisible: true,
+  visibleSeverities: ['INFO', 'WARNING', 'ERROR'],
 };
 
 const settingsSlice = createSlice({
@@ -17,19 +15,20 @@ const settingsSlice = createSlice({
     setDarkMode(state, action) {
       state.isDarkMode = action.payload;
     },
-    setInfosVisibility(state, action) {
-      state.infosVisible = action.payload;
-    },
-    setWarningsVisibility(state, action) {
-      state.warningsVisible = action.payload;
-    },
-    setErrorsVisibility(state, action) {
-      state.errorsVisible = action.payload;
+    setSeverityVisible(state, action) {
+      const { shouldShow, severity } = action.payload;
+      const isShown = state.visibleSeverities.includes(severity);
+      if (shouldShow && !isShown) {
+        state.visibleSeverities.push(severity);
+      }
+      if (!shouldShow && isShown) {
+        state.visibleSeverities = state.visibleSeverities.filter((shown) => shown !== severity);
+      }
     },
   },
 });
 
 export const {
-  setDarkMode, setInfosVisibility, setWarningsVisibility, setErrorsVisibility,
+  setDarkMode, setSeverityVisible,
 } = settingsSlice.actions;
 export default settingsSlice.reducer;
