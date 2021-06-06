@@ -22,7 +22,7 @@ const App = () => {
       palette: {
         type: isDarkMode ? 'dark' : 'light',
         primary: {
-          main: '#121a19',
+          main: 'rgba(0, 0, 0, 0.90)',
         },
         background: {
           default: isDarkMode ? 'rgba(0, 0, 0, 0.95)' : 'rgba(0, 0, 0, 0.12)',

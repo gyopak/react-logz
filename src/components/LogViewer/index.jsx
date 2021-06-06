@@ -99,7 +99,7 @@ export default function LogViewer() {
 
   const handleScroll = (event) => {
     const { y } = containerRef.current.getBoundingClientRect();
-    const shouldRequestOldLogs = y >= theme.spacing(8);
+    const shouldRequestOldLogs = y >= theme.spacing(6);
     if (shouldRequestOldLogs && !isOldLogFetching) requestOldLogs();
     if (followLogs && event.deltaY < 0) setFollowLogs(false);
   };
@@ -120,7 +120,7 @@ export default function LogViewer() {
 
   return (
     <>
-      <Backdrop className={classes.loader} open={isPollingLoading || isOldLogFetching}>
+      <Backdrop className={classes.loader} open={isPollingLoading || isOldLogFetching || !logs}>
         <CircularProgress color="inherit" />
       </Backdrop>
       <div className={classes.container} ref={containerRef} onWheel={handleScroll}>

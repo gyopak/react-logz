@@ -36,8 +36,7 @@ app.get('/logs', (req, res) => {
   const now = Date.now();
   const before = Number(req.query.before) || now;
   const after = Number(req.query.after) || now - 1000000;
-
-  const limit = after === now - 1000000 ? 50 : Math.round(Math.random() * 5) + 1;
+  const limit = after === now - 1000000 ? 50 : Math.round(Math.random()) + 1;
 
   const logs = [...Array(limit).keys()].map(() => generateLogLine(before, after));
   const timeOut = limit > 5 ? 2000 : 0;
