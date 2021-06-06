@@ -17,12 +17,9 @@ import {
 } from '../features/settingsSlice';
 
 const useStyles = makeStyles((theme) => ({
-  header: {
-    textAlign: 'end',
-  },
   closeButton: {
     position: 'absolute',
-    left: theme.spacing(1),
+    right: theme.spacing(1),
     top: theme.spacing(1),
   },
   formRow: {
@@ -82,46 +79,46 @@ export default function Settings() {
       </IconButton>
       <Dialog onClose={handleClose} aria-labelledby="settings-dialog" open={open}>
         <DialogTitle>
-          <Typography variant="h5" className={classes.header}>Settings</Typography>
+          <Typography variant="h5">Settings</Typography>
           <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
         <DialogContent dividers>
-          <Typography variant="h6" className={classes.header}>Appearence</Typography>
+          <Typography variant="h6">Appearence</Typography>
           <FormGroup aria-label="position">
             <FormControlLabel
               className={classes.formRow}
               value="start"
               control={<Switch checked={isDarkMode} onChange={toggleDarkMode} color="primary" />}
               label="Dark mode"
-              labelPlacement="start"
+              labelPlacement="end"
             />
           </FormGroup>
         </DialogContent>
         <DialogContent dividers>
-          <Typography variant="h6" className={classes.header}>Content</Typography>
+          <Typography variant="h6">Content</Typography>
           <FormGroup aria-label="position">
             <FormControlLabel
               value="start"
               className={classes.formRow}
               control={<Switch checked={isInfosVisible} onChange={toggleInfosVisibility} color="primary" />}
               label="Show infos"
-              labelPlacement="start"
+              labelPlacement="end"
             />
             <FormControlLabel
               value="start"
               className={classes.formRow}
               control={<Switch checked={isErrorsVisible} onChange={toggleErrorsVisibility} color="primary" />}
               label="Show errors"
-              labelPlacement="start"
+              labelPlacement="end"
             />
             <FormControlLabel
               value="start"
               className={classes.formRow}
               control={<Switch checked={isWarningsVisible} onChange={toggleWarningsVisibility} color="primary" />}
               label="Show warnings"
-              labelPlacement="start"
+              labelPlacement="end"
             />
           </FormGroup>
         </DialogContent>

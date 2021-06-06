@@ -16,12 +16,20 @@ const initialState = {
   },
 };
 
+const countLogsByType = (logs, type) => (
+  logs.filter((log) => log.type === type).length
+);
+
 const logCacheSlice = createSlice({
   name: 'logCache',
   initialState,
   reducers: {
     receivePolledLogs(state, action) {
-      state.logs.push(...action.payload);
+      const newLogs = action.payload;
+      state.logs.push(...newLogs);
+      state.counts.error += countLogsByType(newLogs, 'ERROR');
+      state.counts.warning += countLogsByType(newLogs, 'WARNING');
+      state.counts.info += countLogsByType(newLogs, 'INFO');
       if (state.logs.length > state.cacheSize) {
         // wipe old logs, cache is full
         state.logs.splice(0, state.cacheSize / 2);
@@ -29,7 +37,11 @@ const logCacheSlice = createSlice({
     },
     receiveOldLogs(state, action) {
       state.isPollingEnabled = false;
-      state.logs.unshift(...action.payload);
+      const oldLogs = action.payload;
+      state.logs.unshift(...oldLogs);
+      state.counts.error += countLogsByType(oldLogs, 'ERROR');
+      state.counts.warning += countLogsByType(oldLogs, 'WARNING');
+      state.counts.info += countLogsByType(oldLogs, 'INFO');
       if (state.logs.length > state.cacheSize) {
         // again but with the newer logs
         const amountToWipe = state.cacheSize / 2;
@@ -41,7 +53,6 @@ const logCacheSlice = createSlice({
       state.isPollingEnabled = true;
     },
     reset(state) {
-      // eslint-disable-next-line no-unused-vars
       state.logs = initialState.logs;
       state.isPollingEnabled = true;
     },

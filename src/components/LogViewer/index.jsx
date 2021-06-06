@@ -6,12 +6,13 @@ import VerticalAlignBottomIcon from '@material-ui/icons/VerticalAlignBottom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useFetchNewLogsQuery, useFetchOldLogsQuery } from '../../features/logApiSlice';
-import { receivePolledLogs, receiveOldLogs, enablePolling, reset } from '../../features/logCacheSlice';
+import { receivePolledLogs, receiveOldLogs, reset } from '../../features/logCacheSlice';
 import LogLine from './LogLine';
 
 const useStyles = makeStyles((theme) => ({
   loader: {
     backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    color: 'white',
     zIndex: 1,
   },
   followLogs: {
@@ -85,7 +86,6 @@ export default function LogViewer() {
   const scrollToBottom = () => {
     containerRef?.current?.scrollIntoView(
       {
-        behavior: 'smooth',
         block: 'end',
         inline: 'nearest',
       },
@@ -120,7 +120,10 @@ export default function LogViewer() {
 
   return (
     <>
-      <Backdrop className={classes.loader} open={isPollingLoading || isOldLogFetching || !logs}>
+      <Backdrop
+        className={classes.loader}
+        open={isPollingLoading || isOldLogFetching || !logs.length}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
       <div className={classes.container} ref={containerRef} onWheel={handleScroll}>
