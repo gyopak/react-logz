@@ -4,6 +4,11 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -22,8 +27,14 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
   },
+  tabs: {
+    display: 'flex',
+  },
   formRow: {
-    padding: theme.spacing(1),
+    paddingTop: theme.spacing(1),
+  },
+  control: {
+    marginTop: theme.spacing(1),
   },
 }));
 
@@ -84,44 +95,73 @@ export default function Settings() {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent dividers>
-          <Typography variant="h6">Appearence</Typography>
-          <FormGroup aria-label="position">
-            <FormControlLabel
-              className={classes.formRow}
-              value="start"
-              control={<Switch checked={isDarkMode} onChange={toggleDarkMode} color="primary" />}
-              label="Dark mode"
-              labelPlacement="end"
-            />
-          </FormGroup>
-        </DialogContent>
-        <DialogContent dividers>
-          <Typography variant="h6">Content</Typography>
-          <FormGroup aria-label="position">
-            <FormControlLabel
-              value="start"
-              className={classes.formRow}
-              control={<Switch checked={isInfosVisible} onChange={toggleInfosVisibility} color="primary" />}
-              label="Show infos"
-              labelPlacement="end"
-            />
-            <FormControlLabel
-              value="start"
-              className={classes.formRow}
-              control={<Switch checked={isErrorsVisible} onChange={toggleErrorsVisibility} color="primary" />}
-              label="Show errors"
-              labelPlacement="end"
-            />
-            <FormControlLabel
-              value="start"
-              className={classes.formRow}
-              control={<Switch checked={isWarningsVisible} onChange={toggleWarningsVisibility} color="primary" />}
-              label="Show warnings"
-              labelPlacement="end"
-            />
-          </FormGroup>
-        </DialogContent>
+        <div className={classes.tabs}>
+          <div className={classes.leftTab}>
+            <DialogContent>
+              <Typography variant="h6">Tweaks</Typography>
+              <FormGroup aria-label="position">
+                <FormControlLabel
+                  className={classes.formRow}
+                  value="start"
+                  control={<Switch checked={isDarkMode} onChange={toggleDarkMode} color="primary" />}
+                  label="Dark mode"
+                  labelPlacement="end"
+                />
+              </FormGroup>
+              <FormControl>
+                <FormControlLabel
+                  className={classes.formRow}
+                  value="start"
+                  control={(
+                    <Select
+                      value={500}
+                    // onChange={handleChange}
+                    >
+                      <MenuItem value={200}>200</MenuItem>
+                      <MenuItem value={500}>500</MenuItem>
+                      <MenuItem value={100}>1000</MenuItem>
+                    </Select>
+)}
+                  label="Cache size"
+                  labelPlacement="end"
+                />
+              </FormControl>
+              <FormGroup aria-label="position">
+                <Button variant="outlined" color="secondary" className={classes.control}>
+                  Reset
+                </Button>
+              </FormGroup>
+            </DialogContent>
+          </div>
+          <div className={classes.rightTab}>
+            <DialogContent>
+              <Typography variant="h6">Filters</Typography>
+              <FormGroup aria-label="position">
+                <FormControlLabel
+                  value="start"
+                  className={classes.formRow}
+                  control={<Switch checked={isInfosVisible} onChange={toggleInfosVisibility} color="primary" />}
+                  label="Show infos"
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value="start"
+                  className={classes.formRow}
+                  control={<Switch checked={isErrorsVisible} onChange={toggleErrorsVisibility} color="primary" />}
+                  label="Show errors"
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value="start"
+                  className={classes.formRow}
+                  control={<Switch checked={isWarningsVisible} onChange={toggleWarningsVisibility} color="primary" />}
+                  label="Show warnings"
+                  labelPlacement="end"
+                />
+              </FormGroup>
+            </DialogContent>
+          </div>
+        </div>
       </Dialog>
     </>
   );
