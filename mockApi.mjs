@@ -22,7 +22,7 @@ const getRandomLine = (type) => {
 };
 
 const generateLogLine = (before = Date.now(), after = Date.now() - 10000) => {
-  const time = Math.floor(Math.random() * before) + after;
+  const time = Math.floor(Math.random() * (Number(before) - Number(after))) + Number(after);
   const type = getRandomType();
   const line = getRandomLine(type);
   return {
@@ -33,17 +33,21 @@ const generateLogLine = (before = Date.now(), after = Date.now() - 10000) => {
 };
 
 app.get('/logs', (req, res) => {
-  const limit = req.query.limit || Math.floor(Math.random() * 3) + 1;
-  const before = req.query.before || Date.now();
-  const after = req.query.after || 0;
+  const now = Date.now();
+  const before = Number(req.query.before) || now;
+  const after = Number(req.query.after) || now - 1000000;
+
+  const limit = after === now - 1000000 ? 50 : Math.round(Math.random() * 5) + 1;
+
   const logs = [...Array(limit).keys()].map(() => generateLogLine(before, after));
-  const timeOut = req.query.limit < 3 ? 1000 : 3000;
+  const timeOut = limit > 5 ? 2000 : 0;
+
   setTimeout(() => {
     res.send({
       limit: req.query.limit || -1,
       before,
       after,
-      logs: logs.sort((a, b) => a.time < b.time),
+      logs: logs.sort((a, b) => a.time - b.time),
       count: logs.length,
     });
   }, timeOut);

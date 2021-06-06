@@ -7,14 +7,19 @@ const logApiSlice = createApi({
   }),
   endpoints(builder) {
     return {
-      fetchLogs: builder.query({
-        query(before = Date.now(), after = 0, limit = 50) {
+      fetchNewLogs: builder.query({
+        query(after = 0, before = Date.now(), limit = 50) {
           return `/logs?limit=${limit}&before=${before}&after=${after}`;
+        },
+      }),
+      fetchOldLogs: builder.query({
+        query(before = Date.now(), limit = 100) {
+          return `/logs?limit=${limit}&before=${before}`;
         },
       }),
     };
   },
 });
 
-export const { useFetchLogsQuery } = logApiSlice;
+export const { useFetchNewLogsQuery, useFetchOldLogsQuery } = logApiSlice;
 export default logApiSlice;

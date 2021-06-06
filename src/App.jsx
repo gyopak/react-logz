@@ -8,10 +8,11 @@ import LogViewer from './components/LogViewer';
 import { setDarkMode } from './features/settingsSlice';
 
 const App = () => {
-  const isDarkMode = useSelector((state) => state.settings.isDarkMode);
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const dispatch = useDispatch();
+  const isDarkMode = useSelector((state) => state.settings.isDarkMode);
 
+  // check if user has preferred dark mode, set it initially and if it changes
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   useEffect(() => {
     dispatch(setDarkMode(prefersDarkMode));
   }, [dispatch, prefersDarkMode]);
@@ -20,6 +21,12 @@ const App = () => {
     () => createMuiTheme({
       palette: {
         type: isDarkMode ? 'dark' : 'light',
+        primary: {
+          main: '#121a19',
+        },
+        background: {
+          default: isDarkMode ? 'rgba(0, 0, 0, 0.95)' : 'rgba(0, 0, 0, 0.12)',
+        },
       },
     }),
     [isDarkMode],

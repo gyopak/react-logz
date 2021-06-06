@@ -17,16 +17,16 @@ import {
 } from '../features/settingsSlice';
 
 const useStyles = makeStyles((theme) => ({
+  header: {
+    textAlign: 'end',
+  },
   closeButton: {
     position: 'absolute',
-    right: theme.spacing(1),
+    left: theme.spacing(1),
     top: theme.spacing(1),
   },
   formRow: {
     padding: theme.spacing(1),
-  },
-  subHeader: {
-    textAlign: 'end',
   },
 }));
 
@@ -82,13 +82,13 @@ export default function Settings() {
       </IconButton>
       <Dialog onClose={handleClose} aria-labelledby="settings-dialog" open={open}>
         <DialogTitle>
-          <Typography variant="h5">Settings</Typography>
+          <Typography variant="h5" className={classes.header}>Settings</Typography>
           <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
         <DialogContent dividers>
-          <Typography variant="h6" className={classes.subHeader}>Appearence</Typography>
+          <Typography variant="h6" className={classes.header}>Appearence</Typography>
           <FormGroup aria-label="position">
             <FormControlLabel
               className={classes.formRow}
@@ -100,7 +100,7 @@ export default function Settings() {
           </FormGroup>
         </DialogContent>
         <DialogContent dividers>
-          <Typography variant="h6" className={classes.subHeader}>Content</Typography>
+          <Typography variant="h6" className={classes.header}>Content</Typography>
           <FormGroup aria-label="position">
             <FormControlLabel
               value="start"

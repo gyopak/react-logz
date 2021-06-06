@@ -29,20 +29,10 @@
         "POST /relationships/dynamic/b2c HTTP/1.0",
         "PUT /cutting-edge/user-centric/whiteboard HTTP/1.0",
         "PATCH /relationships/dynamic/engage HTTP/2.0",
-        "dependency.",
         "Saved 1 new dependency",
         "Successfully created .eslintrc.js file in /Users/gyorgypakozdi/dev/logz",
         "added 20 packages from 9 contributors, removed 15 packages, updated 266 packages and audited 286 packages in 22.657s",
         "core-js-pure@3.13.1 postinstall /Users/gyorgypakozdi/dev/logz/node_modules/core-js-pure",
-        "Installing eslint-plugin-react@^7.21.5, eslint-config-airbnb@latest, eslint@^5.16.0 || ^6.8.0 || ^7.2.0, eslint-plugin-import@^2.22.1, eslint-plugin-jsx-a11y@^6.4.1, eslint-plugin-react-hooks@^4 || ^3 || ^2.3.0 || ^1.7.0",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "Installing eslint-plugin-react@^7.21.5, eslint-config-airbnb@latest, eslint@^5.16.0 || ^6.8.0 || ^7.2.0, eslint-plugin-import@^2.22.1, eslint-plugin-jsx-a11y@^6.4.1, eslint-plugin-react-hooks@^4 || ^3 || ^2.3.0 || ^1.7.0"
     ]
 }

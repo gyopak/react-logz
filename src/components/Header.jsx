@@ -6,7 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Settings from './Settings';
 import Statistics from './Statistics';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
+  toolBar: {
+    minHeight: theme.spacing(9),
+  },
   title: {
     flexGrow: 1,
   },
@@ -17,7 +20,7 @@ export default function Header() {
 
   return (
     <AppBar position="sticky">
-      <Toolbar>
+      <Toolbar className={classes.toolBar}>
         <Typography variant="h6" className={classes.title}>
           logz
         </Typography>
