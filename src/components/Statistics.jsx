@@ -3,6 +3,12 @@ import { useSelector } from 'react-redux';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import SeverityChip from './LogViewer/SeverityChip';
 
+const MAX_VISIBLE_COUNT = 999;
+
+const getCounterValue = (value) => (
+  value < MAX_VISIBLE_COUNT ? value : `${MAX_VISIBLE_COUNT}+`
+);
+
 export default function Statistics() {
   const showLabel = useMediaQuery('(min-width:450px)');
   const { counts } = useSelector((state) => state.logCache);
@@ -13,6 +19,11 @@ export default function Statistics() {
   ];
   return counters.map((counter) => {
     const label = showLabel ? `${counter.label}: ` : '';
-    return <SeverityChip type={counter.type} label={`${label}${counter.value}`} />;
+    return (
+      <SeverityChip
+        type={counter.type}
+        label={`${label}${getCounterValue(counter.value)}`}
+      />
+    );
   });
 }

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const logApiSlice = createApi({
   reducerPath: 'logApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:9000',
+    baseUrl: 'https://sphenoid-outstanding-chef.glitch.me',
   }),
   endpoints(builder) {
     return {
