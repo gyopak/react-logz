@@ -22,17 +22,12 @@ import {
 
 import {
   setCacheSize,
+  reset,
 } from '../features/logCacheSlice';
 
 const Switch = withStyles((theme) => ({
   root: {
     marginRight: theme.spacing(3),
-    // color: 'white',
-    // minWidth: '70px',
-    // [theme.breakpoints.down('sm')]: {
-    //   minWidth: '20px',
-    // },
-    // margin: theme.spacing(1),
   },
 }))(MuiSwitch);
 
@@ -88,6 +83,11 @@ export default function Settings() {
 
   const changeCacheSize = (e) => {
     dispatch(setCacheSize(e.target.value));
+  };
+
+  const requestReset = () => {
+    dispatch(reset());
+    handleClose();
   };
 
   const toggleInfosVisibility = () => {
@@ -156,7 +156,7 @@ export default function Settings() {
                 />
               </FormControl>
               <FormGroup className={classes.button} aria-label="position">
-                <Button variant="outlined" color="secondary" className={classes.control}>
+                <Button variant="outlined" color="secondary" className={classes.control} onClick={requestReset}>
                   Reset
                 </Button>
               </FormGroup>
