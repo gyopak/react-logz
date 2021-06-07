@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
   tabs: {
     display: 'flex',
+    [theme.breakpoints.down('xs')]: {
+      display: 'block',
+    },
   },
   dropdown: {
     margin: `0 ${theme.spacing(2)}px`,
