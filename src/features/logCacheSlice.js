@@ -52,6 +52,9 @@ const logCacheSlice = createSlice({
     enablePolling(state) {
       state.isPollingEnabled = true;
     },
+    setCacheSize(state, action) {
+      state.cacheSize = action.payload;
+    },
     reset(state) {
       state.logs = initialState.logs;
       state.isPollingEnabled = true;
@@ -60,6 +63,6 @@ const logCacheSlice = createSlice({
 });
 
 export const {
-  receivePolledLogs, receiveOldLogs, enablePolling, reset,
+  receivePolledLogs, receiveOldLogs, enablePolling, reset, setCacheSize,
 } = logCacheSlice.actions;
 export default logCacheSlice.reducer;

@@ -5,7 +5,7 @@ import fs from 'fs';
 const mockLogLines = JSON.parse(fs.readFileSync('mockLogLines.json'));
 
 const app = express();
-const PORT = 9000;
+const PORT = 3000;
 
 app.use(cors());
 
@@ -35,11 +35,11 @@ const generateLogLine = (before = Date.now(), after = Date.now() - 10000) => {
 app.get('/logs', (req, res) => {
   const now = Date.now();
   const before = Number(req.query.before) || now;
-  const after = Number(req.query.after) || now - 1000000;
-  const limit = after === now - 1000000 ? 50 : Math.round(Math.random()) + 1;
+  const after = Number(req.query.after) || now - 10000000000;
+  const limit = after === now - 10000000000 ? 50 : Math.round(Math.random()) + 1;
 
   const logs = [...Array(limit).keys()].map(() => generateLogLine(before, after));
-  const timeOut = limit > 5 ? 2000 : 0;
+  const timeOut = limit > 5 ? 200 : 0;
 
   setTimeout(() => {
     res.send({

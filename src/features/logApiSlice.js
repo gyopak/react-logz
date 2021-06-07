@@ -14,7 +14,7 @@ const logApiSlice = createApi({
       }),
       fetchOldLogs: builder.query({
         query(before = Date.now(), limit = 100) {
-          return `/logs?limit=${limit}&before=${before}`;
+          return `/logs?limit=${limit}&before=${before}&after=${0}`;
         },
       }),
     };
