@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   line: {
+    fontFamily: 'monospace',
     padding: theme.spacing(1),
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2),
